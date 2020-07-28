@@ -1,0 +1,113 @@
+class Media{
+  constructor(title){
+    this._title = title;
+    this._ratings = [];
+    this._isCheckedOut = false;
+  };
+
+  get title(){
+    return this._title;
+  }
+  get isCheckedOut(){
+    return this._isCheckedOut;
+  }
+  get ratings(){
+    return this._ratings;
+  }
+
+  set isCheckedOut(isIt){
+    this._isCheckedOut = isIt;
+    
+  }
+  toggleCheckOutStatus(){
+    this._isCheckedOut = !this._isCheckedOut;
+  }
+
+  getAverageRating(){
+    let totalRating = this._ratings.reduce(function(a, b) {
+      return a + b;
+    })
+    
+    let aveRat = Math.floor(totalRating/this.ratings.length);
+    return aveRat;
+  }
+  addRating(newRating){
+    this._ratings.push(newRating);
+  }
+}
+
+class Book extends Media{
+  constructor(author,title,pages){
+    super(title);
+    this._author = author;
+    this._title = title;
+    this._pages = pages;
+  }
+  get author() {
+    return this._author;
+  }
+  get pages() {
+    return this._pages;
+  }
+  }
+  class Movie extends Media{
+  constructor(director,title, runTime){
+    super(title);
+    this._director = director;
+    this._title = title;
+    this._runTime = runTime;
+  }
+  get director(){
+    return this._director;
+  }
+  get runTime(){
+    return this._runTime;
+  }
+  }
+
+  class CD extends Media{
+    constructor(artist, title, songs){
+      super(title);
+      this._artist = artist;
+      this._title = title;
+      this._songs = songs;
+    }
+    get artist(){
+      return this._artist;
+    }
+    get songs(){
+      return this._songs;
+    }
+  }
+
+const historyOfEverything = new Book('Bill Bryson','A Short History of Nearly Everything', 544);
+historyOfEverything.addRating(4);
+historyOfEverything.addRating(10);
+historyOfEverything.addRating(7);
+/*console.log(historyOfEverything.isCheckedOut);
+historyOfEverything.toggleCheckOutStatus();
+console.log(historyOfEverything.isCheckedOut);
+historyOfEverything.toggleCheckOutStatus();
+console.log(historyOfEverything.getAverageRating());*/
+
+const speed = new Movie('Jan de Bont','Speed',116);
+/*console.log(speed.director);
+console.log(speed.isCheckedOut);
+speed.toggleCheckOutStatus();
+console.log(speed.isCheckedOut);
+speed.toggleCheckOutStatus();
+console.log(speed.isCheckedOut);*/
+speed.toggleCheckOutStatus();
+speed.addRating(1);
+speed.addRating(1);
+speed.addRating(5);
+//console.log(speed.getAverageRating());
+
+const inception = new Movie('Christopher Nolan','Inception',148);
+inception.addRating(10);
+console.log(inception.getAverageRating());
+
+const okcomputer = new CD('Radiohead','OK Computer',['Airbag','Paranoid Android','Subterranean homesick blues','Exit music (for a film)']);
+
+console.log(okcomputer.songs);
+
